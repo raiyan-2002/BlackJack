@@ -1,0 +1,119 @@
+[
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "Card",
+        "kind": 6,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "class Card:\n    def __init__(self, num, suit=None):\n        self.num = str(num)\n        self.suit = suit\n    # this is what i want to appear when printing the cards\n    def __str__(self):\n        return \"{num} of {suit}\".format(num = self.num, suit = self.suit)\n    # use this to compare Cards\n    def __eq__(self, other):\n        return self.num == other.num",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "Player",
+        "kind": 6,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "class Player:\n    def __init__(self, cards=[], score=0):\n        self._cards = cards\n        self._score = score\n    def __str__(self):\n        start = \"Cards: \"\n        for card in self._cards:\n            start += str(card) + \", \"\n        return start[:-2]\n    @property",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "Balance",
+        "kind": 6,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "class Balance:\n    def __init__(self, cash=1000):\n        self.cash = cash\n    def __str__(self):\n        return \"Balance: ${cash}\".format(cash = round((self.cash), 2))\n    @property\n    def cash(self):\n        return self._cash\n    @cash.setter\n    def cash(self, cash):",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "generate_deck",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def generate_deck():\n    cards = []\n    for i in suits:\n        for k, card in enumerate(num_cards):\n            cards.append(Card(num_cards[k], i))\n        for card in face_cards:\n            cards.append(Card(card, i))\n    return cards\n# this will generate a dict of all the Cards in the deck and their respective values\ndef generate_values(cards):",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "generate_values",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def generate_values(cards):\n    deck = {}\n    for card in cards:\n        if card.num in [\"King\", \"Queen\", \"Jack\"]:\n            deck[card] = 10\n        elif card.num == \"Ace\":\n            deck[card] = 11\n        else:\n            deck[card] = int(card.num)\n    return deck",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "add_cards",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def add_cards(copy, player, num, deck):\n    new = random.sample(list(copy.keys()), num)\n    for i in new:\n        del copy[i]\n    length = len(player._cards)\n    if length == 0:\n        player._cards = new\n    else:\n        player._cards.extend(new)\n    player.tally(deck)",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "print_score",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def print_score(player):\n    print(\"Score: {score}\\n\".format(score = player._score))\n# this function will return the text to print after the game ends, and will adjust balance.cash accordingly\ndef winner(\n    player_win,\n    dealer_win,\n    player_bust,\n    dealer_bust,\n    player_score,\n    dealer_score,",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "winner",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def winner(\n    player_win,\n    dealer_win,\n    player_bust,\n    dealer_bust,\n    player_score,\n    dealer_score,\n    balance,\n    bet,\n):",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def main():\n    # assign the balance of the player, default value is 1000\n    balance = Balance()\n    # generate a list of Card objects, shuffle them, and then make a dict with each Card as a key and its value\n    cards = generate_deck()\n    random.shuffle(cards)\n    deck = generate_values(cards)\n    # print the user's balance\n    print(\"{balance} \\n\".format(balance = str(balance)))\n    while True:",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "suits",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "suits = [\"Hearts\", \"Diamonds\", \"Spades\", \"Clubs\"]\nnum_cards = [i for i in range(2, 11)]\nface_cards = [\"Jack\", \"Queen\", \"King\", \"Ace\"]\n# define a Card class which takes a num, and suit argument\nclass Card:\n    def __init__(self, num, suit=None):\n        self.num = str(num)\n        self.suit = suit\n    # this is what i want to appear when printing the cards\n    def __str__(self):",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "num_cards",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "num_cards = [i for i in range(2, 11)]\nface_cards = [\"Jack\", \"Queen\", \"King\", \"Ace\"]\n# define a Card class which takes a num, and suit argument\nclass Card:\n    def __init__(self, num, suit=None):\n        self.num = str(num)\n        self.suit = suit\n    # this is what i want to appear when printing the cards\n    def __str__(self):\n        return \"{num} of {suit}\".format(num = self.num, suit = self.suit)",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "face_cards",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "face_cards = [\"Jack\", \"Queen\", \"King\", \"Ace\"]\n# define a Card class which takes a num, and suit argument\nclass Card:\n    def __init__(self, num, suit=None):\n        self.num = str(num)\n        self.suit = suit\n    # this is what i want to appear when printing the cards\n    def __str__(self):\n        return \"{num} of {suit}\".format(num = self.num, suit = self.suit)\n    # use this to compare Cards",
+        "detail": "main",
+        "documentation": {}
+    }
+]
